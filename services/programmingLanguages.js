@@ -6,10 +6,12 @@ async function getMultiple(page = 1) {
 
     const offset = helper.getOffSet(page, helper.listPerPage)
 
-    const rows = await db.query(
-        `SELECT id, name, released_year, githut_rank, pypl_rank, tiobe_rank 
+    let sql = `SELECT id, name, released_year, githut_rank, pypl_rank, tiobe_rank 
     FROM programming_languages LIMIT ${offset},${config.listPerPage}`
-    );
+
+    console.log(sql)
+    
+    const rows = await db.query(sql)
 
     const data = helper.emptyOrRows(rows);
 
